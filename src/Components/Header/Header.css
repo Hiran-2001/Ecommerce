@@ -1,6 +1,7 @@
 #header-main{
     background-color: rgb(255, 255, 255);
     height: 80px;
+    display: flex;
 }
 #logo{
     height: 70px;
