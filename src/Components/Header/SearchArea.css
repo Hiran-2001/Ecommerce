@@ -1,6 +1,29 @@
 #SearchArea-div{
-    background-color: blue;
+    background-color: rgb(255, 255, 255);
     width: 350px;
-    height: 50px;
+    height: 45px;
     border-radius: 25px;
+    margin-left: 380px;
+    margin-top: 15px;
+    display: flex;
+   box-shadow: .5px 1px 2px 1px #ccc; ;
+}
+.btn{
+    border: none;
+    background-color: white;
+    margin-left: 26px;
+    color: black;
+   font-weight: 600;
+}
+.search-btn{
+    background-color: red;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    color: white;
+    margin-left: 30px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 2px;
 }
