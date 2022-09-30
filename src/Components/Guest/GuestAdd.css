@@ -1,0 +1,31 @@
+#guest-add-main {
+  background-color: rgb(230, 219, 219);
+  height: 470px;
+  width: 400px;
+  margin-left: 750px;
+}
+#guest-add-button-div {
+  height: 65px;
+  width: 250px;
+  background-color: white;
+  border-radius: 40px;
+  margin-left: 70px;
+  position: relative;
+  top:  5px;
+  display: flex;
+}
+#guest-add-counter-div {
+  height: 400px;
+  width: 400px;
+}
+#guest-add-btn{
+    /* background-color: red; */
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    width: 110px;
+    height: 50px;
+    margin-top:8px ;
+    margin-left: 70px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+}
