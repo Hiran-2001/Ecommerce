@@ -29,12 +29,13 @@ margin-left: 4px;
 }
 #profile{
     /* background-color: red; */
-    height: 30px;
+    height: 40px;
     width: 75px;
     margin-top: 20px;
     padding-top: 10px;
     margin-left: 25px;
     display: flex;
+    border: none;
     border-radius: 25px;
       box-shadow: 0.5px 1px 2px 1px #ccc;
 
