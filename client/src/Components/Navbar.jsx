@@ -5,7 +5,8 @@ import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 const Container = styled.div`
   height: 60px;
-  ${"" /* background-color:black; */}
+  /* background-color:black; */
+  box-shadow: 0px 1px 25px black;
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -26,11 +27,16 @@ const Logo = styled.div`
 `;
 const Right = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
 `;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
+  margin-left: 25px;
 `;
 
 const Language = styled.span`
@@ -44,6 +50,7 @@ const SearchContainer = styled.div`
   align-items: center;
   padding: 5px;
   margin-left: 25px;
+  height: 25px;
 `;
 
 const Input = styled.input`
@@ -59,7 +66,7 @@ function Navbar() {
           <Language>EN</Language>
           <SearchContainer>
             <Input />
-            <Search />
+            <Search style={{color:"gray",fontSize:25}} />
           </SearchContainer>
         </Left>
         <Center>
