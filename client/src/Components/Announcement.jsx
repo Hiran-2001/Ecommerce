@@ -15,7 +15,7 @@ const Container = styled.div`
 function Announcement() {
   return (
     <Container>
-    Free Delivery for on week 
+    Free Delivery for one week 
     </Container>
   )
 }
