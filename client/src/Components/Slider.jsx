@@ -1,5 +1,6 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material'
 import styled from 'styled-components'
+import { mobile } from '../Utils/Responsive'
 
 const Container = styled.div`
 width: 100%;
@@ -8,6 +9,7 @@ display: flex;
 /* background-color: coral; */
 position: relative;
 overflow: hidden;
+${mobile({display:"none"})}
 `
 const Arrow = styled.div`
   width: 50px;

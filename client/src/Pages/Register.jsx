@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { mobile } from "../Utils/Responsive"
 
 const Container = styled.div`
  width: 100vw;
@@ -15,6 +16,7 @@ const Wrapper = styled.div`
 width: 40%;
  padding: 20px;
  background-color: white;
+ ${mobile({width:"75%",borderRadius:"5px"})}
 `
 const Title = styled.h1`
 font-size: 25px;
@@ -23,6 +25,8 @@ font-weight: 400;
 const Form = styled.form`
  display: flex;
  flex-wrap: wrap;
+ justify-content: center;
+ 
 `
 const Input = styled.input`
   flex: 1;
@@ -38,8 +42,10 @@ const Button = styled.button`
 width: 40%;
 border: 1px solid black;
 padding: 15px 20px;
-background-color: white;
+background-color: black;
+color: white;
 cursor: pointer;
+${mobile({width:"70%",})}
 `
 
 function Register() {
