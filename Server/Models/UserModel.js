@@ -21,14 +21,14 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    Tokens:[
-      {
-        token:{
-          type:String,
-          required:true
-        }
-      }
-    ]
+    // Tokens:[
+    //   {
+    //     token:{
+    //       type:String,
+    //       required:true
+    //     }
+    //   }
+    // ]
   },
   { timestamps: true }
 );
@@ -50,9 +50,7 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
   );
   
   const password = hashedPassword.toString(cryptoJS.enc.Utf8);
-  
-  console.log(password);
-  console.log(enteredPassword);
+
 
   if (password === enteredPassword) {
     return true;
@@ -62,13 +60,15 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 
-UserSchema.methods.generateToken = async function(){
+UserSchema.methods.generateToken = async function(id){
 
   try {
-    let authToken = jwt.sign({_id:this._id},process.env.JWT_SECRET);
+    let authToken = jwt.sign({id},process.env.JWT_SECRET,{
+      expiresIn: "7d",
+    });
 
-    this.Tokens = this.Tokens.concat({token:authToken})
-    await this.save();
+    // this.Tokens = this.Tokens.concat({token:authToken})
+    // await this.save();
     return authToken;
   } catch (error) {
     

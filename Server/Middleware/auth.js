@@ -7,20 +7,24 @@ const asyncHandler = require("express-async-handler");
 exports.isAuthenticated = asyncHandler(async (req, res, next) => {
   const token = req.cookies.jwtToken;
 
-  const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+  if (!token) {
+    res.status(401).json({message:"Please login"});
+  }
 
-    
-  const user = await UserModel.findById({_id:verifyToken._id})
-  console.log(user);
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  req.user = await UserModel.findById(decoded.id);
+  console.log(req.user.isAdmin);
   next();
 });
 
 exports.isAuthorizedUser = asyncHandler(async (req, res, next) => {
-  isAuthenticated(req, res, () => {
-    if (req.user.id === req.params.id || req.user.isAdmin) {
-      next();
-    } else {
-      res.status(403).json("You are not allowed to do that"); 
-    }
-  });
+  if (req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({
+      success: false,
+      message: "Not authorized",
+    });
+  }
 });

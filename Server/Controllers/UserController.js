@@ -1,7 +1,10 @@
 const { generateToken } = require("../Middleware/auth");
-const  asyncHandler  = require('express-async-handler') ;
+const asyncHandler = require("express-async-handler");
 const userModel = require("../Models/UserModel");
-exports.register = async (req, res) => {
+
+//register new user  => /api/user/register
+
+exports.register = asyncHandler(async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -28,9 +31,11 @@ exports.register = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-};
+});
 
-exports.login = async (req, res) => {
+//login user => /api/user/login
+
+exports.login = asyncHandler(async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -45,11 +50,8 @@ exports.login = async (req, res) => {
         res.send("Password doesnt match");
       }
 
-      // console.log(user._id);
-      // console.log(user.id);
+      const token = await user.generateToken(user._id);
 
-      const token = await user.generateToken();
-      console.log(token);
       res.cookie("jwtToken", token, {
         expires: new Date(Date.now() + 900000),
         httpOnly: true,
@@ -59,25 +61,37 @@ exports.login = async (req, res) => {
         success: true,
         user,
       });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "No user found",
+      });
     }
   } catch (error) {}
-};
+});
 
-//logout user 
+//logout user =>  /api/user/logout
 
-exports.logout = asyncHandler(async (req,res)=>{
-  res.cookie('jwtToken',null,{
-    expires: new Date(Date.now()),
-    httpOnly:true
-  }).status(200).json({
-    success:true,
-    message:"Logout successfully"
-  })
-})
+exports.logout = asyncHandler(async (req, res) => {
+  try {
+    res
+      .cookie("jwtToken", null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: `Logout successfully`,
+      });
+  } catch (error) {
+    throw new Error(error);
+  }
+});
 
-// update user
+// update user  => /api/user/update/:id
 
-exports.update = async (req, res) => {
+exports.update = asyncHandler(async (req, res) => {
   const newUserData = {
     username: req.body.username,
     email: req.body.email,
@@ -90,4 +104,33 @@ exports.update = async (req, res) => {
     success: true,
     user,
   });
-};
+});
+
+//delete user  => /api/user/delete/:id
+
+exports.deleteUser = asyncHandler(async (req, res, next) => {
+  const user = await userModel.findById(req.params.id);
+
+  try {
+    if (!user) {
+      res.json({
+        success: false,
+        message: "not user find to delete",
+      });
+    }
+
+    await userModel.findByIdAndDelete({ _id: req.params.id });
+    res.status(200).json({
+      success: true,
+      message: `${user.username} deleted successfully`,
+    });
+  } catch (error) {}
+});
+
+
+exports.getUser = asyncHandler(async (req, res, next) => {
+  const user = req.user;
+  res.json({
+    user,
+  });
+});
