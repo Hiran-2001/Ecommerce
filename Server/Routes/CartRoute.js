@@ -7,7 +7,7 @@ router.post('/create',isAuthenticated ,createCart)
 router.put('/update/:id',isAuthenticated ,updateCart)
 router.delete('/delete/:id',isAuthenticated ,deleteCart)
 router.get('/items/:id',isAuthenticated ,getSingleItem)
-router.get('/all',isAuthenticated,isAuthorizedUser ,getItems)
+router.get('/all',isAuthenticated ,getItems)
 
 
 module.exports = router

@@ -14,7 +14,7 @@ exports.isAuthenticated = asyncHandler(async (req, res, next) => {
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
   req.user = await UserModel.findById(decoded.id);
-  console.log(req.user.isAdmin);
+  // console.log(req.user.isAdmin);
   next();
 });
 

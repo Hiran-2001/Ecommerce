@@ -63,13 +63,12 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 UserSchema.methods.generateToken = async function(id){
 
   try {
-    let authToken = jwt.sign({id},process.env.JWT_SECRET,{
-      expiresIn: "7d",
-    });
-
+    
     // this.Tokens = this.Tokens.concat({token:authToken})
     // await this.save();
-    return authToken;
+    return jwt.sign({id},process.env.JWT_SECRET,{
+      expiresIn: "7d",
+    });
   } catch (error) {
     
   }
