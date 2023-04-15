@@ -10,11 +10,13 @@ app.use(express.json())
 app.use(cookieParser())
 const ProductRoutes = require("./Routes/ProductRoute");
 const UserRoutes = require("./Routes/UserRoute");
+const CartRoute = require("./Routes/CartRoute")
+const OrderRoute = require("./Routes/OrderRoute")
 
 app.use('/api/products',ProductRoutes)
 app.use('/api/user',UserRoutes)
-// app.use('/api',OrderRoute)
-// app.use('/api',CartRoute)
+app.use('/api/order',OrderRoute)
+app.use('/api/cart',CartRoute)
 
 
 

@@ -59,9 +59,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
     if(qNew){
         products = await ProductModel.find().sort({createdAt: -1}).limit(1)
     }else if(qCategory){
-        products = await productModel.find({categories:{
-            $in:[qCategory],
-        }})
+       products = await productModel.find({categories:{$in:qCategory}})
     }else{
         products = await productModel.find()
     }
@@ -71,6 +69,7 @@ exports.getAllProducts = asyncHandler(async (req, res, next) => {
     })
   } catch (error) {}
 });
+
 
 // @desc  Get a single product
 // @route GET -> /api/products/:id

@@ -2,7 +2,10 @@ const { generateToken } = require("../Middleware/auth");
 const asyncHandler = require("express-async-handler");
 const userModel = require("../Models/UserModel");
 
-//register new user  => /api/user/register
+//@desc new user registration api
+//@route POST => /api/user/register
+//@access Admin & User
+
 
 exports.register = asyncHandler(async (req, res) => {
   try {
@@ -33,7 +36,11 @@ exports.register = asyncHandler(async (req, res) => {
   }
 });
 
-//login user => /api/user/login
+
+//@desc user login api
+//@route POST => /api/user/login
+//@access Admin & User
+
 
 exports.login = asyncHandler(async (req, res) => {
   try {
@@ -70,7 +77,11 @@ exports.login = asyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
-//logout user =>  /api/user/logout
+
+//@desc user login api
+//@route GET => /api/user/logout
+//@access Admin & User
+ 
 
 exports.logout = asyncHandler(async (req, res) => {
   try {
@@ -89,7 +100,9 @@ exports.logout = asyncHandler(async (req, res) => {
   }
 });
 
-// update user  => /api/user/update/:id
+//@desc user can update their profile
+//@route PUT => /api/user/update/:id
+//@access Admin & User
 
 exports.update = asyncHandler(async (req, res) => {
   const newUserData = {
@@ -106,7 +119,10 @@ exports.update = asyncHandler(async (req, res) => {
   });
 });
 
-//delete user  => /api/user/delete/:id
+//@desc user can delete their account
+//@route GET => /api/user/delete/:id
+//@access Admin & User
+
 
 exports.deleteUser = asyncHandler(async (req, res, next) => {
   const user = await userModel.findById(req.params.id);
@@ -128,9 +144,16 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
 });
 
 
-exports.getUser = asyncHandler(async (req, res, next) => {
-  const user = req.user;
-  res.json({
-    user,
-  });
+//@desc to get all users information
+//@route GET => /api/user/all
+//@access Admin
+
+exports.getAllUser = asyncHandler(async (req, res, next) => {
+  
+  const allUsers = await userModel.find();
+
+  res.status(200).json({
+    success:true,
+    allUsers
+  })
 });
