@@ -52,7 +52,7 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 // @access Admin,User
 
 exports.getAllProducts = asyncHandler(async (req, res, next) => {
-  const qNew = req.query.new;
+  const qNew = req.query.newItem;
   const qCategory = req.query.category;
   let products ;
   try {

@@ -3,10 +3,11 @@ const connectionToDB = require("./Config/Conn");
 const app = express();
 const dotenv = require("dotenv")
 const cookieParser = require('cookie-parser');
-
+const cors = require('cors')
 dotenv.config()
 connectionToDB();
 app.use(express.json())
+app.use(cors())
 app.use(cookieParser())
 const ProductRoutes = require("./Routes/ProductRoute");
 const UserRoutes = require("./Routes/UserRoute");

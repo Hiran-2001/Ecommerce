@@ -5,9 +5,14 @@ import Slider from '../Components/Slider'
 import Categories from '../Components/Categories'
 import Products from '../Components/Products'
 
+
 function Home() {
+
+  
+   
+
   return (
-    <div>
+    <div> 
     <Announcement/>
     <Navbar/>
     <Slider/>

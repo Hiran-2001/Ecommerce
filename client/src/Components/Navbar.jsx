@@ -30,6 +30,7 @@ const Center = styled.div`
 `;
 const Logo = styled.div`
   font-weight: bold;
+  margin-left: 15px;
   ${mobile({fontSize:"24px",marginLeft:"5px"})}
 `;
 const Right = styled.div`
