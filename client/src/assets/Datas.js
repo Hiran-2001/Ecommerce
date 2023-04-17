@@ -3,37 +3,37 @@ export const categories = [
     {
         id:1,
         img:"https://i.ebayimg.com/images/g/pigAAOSwJYhjv9A3/s-l1600.jpg",
-        title:"Otto Shirts",
+        title:"Shirts",
         cat:"Shirt"
     },
     {
         id:2,
-        img:"https://5.imimg.com/data5/ECOM/Default/2022/6/XC/BH/US/12865090/firsttimedad-firsttimemommaternitycouplet-shirtblack-500x500.jpg",
-        title:"T Shirts",
-        cat:"T Shirts"
+        img:"https://5.imimg.com/data5/OW/BK/MY-24100650/kashmiri-cricket-kit-500x500.jpg",
+        title:"Sports",
+        cat:"Sports"
     },
     {
         id:3,
         img:"https://www.jiomart.com/images/product/original/rvsjdmrvbo/dls-wear-boots-for-men-boots-for-men-tan-product-images-rvsjdmrvbo-0-202209071819.jpg",
-        title:"Nike Shoe",
-        cat:"Footwears "
+        title:"Footwear",
+        cat:"Footwear"
     },
     {
         id:4,
         img:"https://images.pexels.com/photos/1342609/pexels-photo-1342609.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        title:"Rolex Watch",
+        title:"Watch",
         cat:"Watch"
     },
     {
         id:5,
         img:"https://m.media-amazon.com/images/I/41etLpNZV6L._SX300_SY300_QL70_FMwebp_.jpg",
-        title:"OnePlus",
+        title:"Phone",
         cat:"Phone"
     },
     {
         id:6,
         img:"https://m.media-amazon.com/images/I/91oHZMW3aHL._SX679_.jpg",
-        title:"Acer TV",
+        title:"TV",
         cat:"TV"
     },
 ]

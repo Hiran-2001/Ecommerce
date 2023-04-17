@@ -4,6 +4,7 @@ import { Search } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import {mobile} from "../Utils/Responsive"
+import { Link } from "react-router-dom";
 const Container = styled.div`
   height: 60px;
   box-shadow: 0px 1px 25px black;
@@ -78,7 +79,8 @@ function Navbar() {
       <Wrapper>
         <Left>
           <Language>EN</Language>
-          <Logo>RcR</Logo>
+          <Link to={"/"} > <Logo>RcR</Logo></Link>
+         
         </Left>
         <Center>
          

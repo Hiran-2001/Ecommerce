@@ -19,8 +19,8 @@ const Products = ({ cat, filter, price, sort }) => {
     const getProduct = async () => {
       try {
         const response = await axios.get(cat ? `/api/products/all?category=${cat}` :  "api/products/all");
-        setProducts(response.data)
-        console.log(response);
+        setProducts(response.data.products)
+        console.log(response.data.products);
       } catch (error) {}
     };
     getProduct();
@@ -33,7 +33,7 @@ const Products = ({ cat, filter, price, sort }) => {
   })
   return (
     <Container>
-      {popularProducts.map((items) => {
+      {products.map((items) => {
         return <Product item={items} key={items.id} />;
       })}
     </Container>
