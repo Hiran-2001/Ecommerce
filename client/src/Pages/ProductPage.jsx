@@ -5,8 +5,8 @@ import Announcement from "../Components/Announcement";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../Utils/Responsive";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from "react";
+// import axios from "axios";
+// import { useEffect } from "react";
 import { useState } from "react";
 import useGet from "../Hooks/useGet";
 
@@ -60,20 +60,20 @@ const FilterTitle = styled.span`
   font-size: 20px;
   font-weight: 200;
 `;
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0 5px;
-  cursor: pointer;
-`;
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 5px;
-`;
-const FilterSizeOption = styled.option``;
+// const FilterColor = styled.div`
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   background-color: ${(props) => props.color};
+//   margin: 0 5px;
+//   cursor: pointer;
+// `;
+// const FilterSize = styled.select`
+//   margin-left: 10px;
+//   padding: 5px;
+//   border-radius: 5px;
+// `;
+// const FilterSizeOption = styled.option``;
 const AddContainer = styled.div`
   width: 50%;
   display: flex;
@@ -108,20 +108,26 @@ const Button = styled.button`
 function ProductPage() {
   const productId = useParams();
   // console.log(productId.id);
-  const [products, setProducts] = useState({});
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await axios.get(`/api/products/${productId.id}`);
-      // console.log(res.data.Product);
-      setProducts(res.data.Product);
-    };
+  const [quantity, setQuantity] = useState(1);
 
-    fetchProducts();
-  }, []);
+  const quantityAddFunc = () => {
+    setQuantity(quantity + 1);
+  };
+  const quantityRmFunc = () => {
+    setQuantity(quantity - 1);
+  };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     const res = await axios.get(`/api/products/${productId.id}`);
+  // console.log(res.data.Product);
+  //     setProducts(res.data.Product);
+  //   };
+
+  //   fetchProducts();
+  // }, []);
 
   const [data] = useGet(`/api/products/${productId.id}`);
 
- 
   return (
     <Container>
       <Announcement />
@@ -156,9 +162,17 @@ function ProductPage() {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove style={{ cursor: "pointer" }} />
-              <Amount>1</Amount>
-              <Add style={{ cursor: "pointer" }} />
+              <Remove
+                onClick={quantityRmFunc}
+                name="remove"
+                style={{ cursor: "pointer" }}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                onClick={quantityAddFunc}
+                name="add"
+                style={{ cursor: "pointer" }}
+              />
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>
