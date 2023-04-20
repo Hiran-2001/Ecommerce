@@ -18,19 +18,33 @@ const Products = ({ cat, filter, price, sort }) => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const response = await axios.get(cat ? `/api/products/all?category=${cat}` :  "api/products/all");
-        setProducts(response.data.products)
+        const response = await axios.get(
+          cat ? `/api/products/all?category=${cat}` : "api/products/all"
+        );
+        setProducts(response.data.products);
         console.log(response.data.products);
       } catch (error) {}
     };
     getProduct();
   }, [cat]);
 
+  // useEffect(()=>{
+  //   if((sort)=== "asc"){
+  //     setFilteredProducts((prev)=>{
+  //       [...prev].sort((a,b)=> a.price - b.price)
+  //     })
+  //   }
+  // },[sort])
 
+  useEffect(() => {
+    if (sort === "asc") {
+      setFilteredProducts((prev)=>{
+        [...prev].sort((a,b)=> a.price - b.price)
+      })
+    }
+  }, [sort]);
 
-  useEffect(()=>{
-
-  })
+  console.log(filteredProducts);
   return (
     <Container>
       {products.map((items) => {

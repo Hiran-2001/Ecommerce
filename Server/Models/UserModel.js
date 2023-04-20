@@ -67,7 +67,7 @@ UserSchema.methods.generateToken = async function(id){
     // this.Tokens = this.Tokens.concat({token:authToken})
     // await this.save();
     return jwt.sign({id},process.env.JWT_SECRET,{
-      expiresIn: "7d",
+      expiresIn: '24h'
     });
   } catch (error) {
     

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Link } from "react-router-dom";
 
 const Info = styled.div`
   opacity: 0;
@@ -23,27 +24,28 @@ const Container = styled.div`
   min-width: 350px;
   max-width: 280px;
   height: 350px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   background-color: #f5f5f5;
-  /* background-color: red; */
+  /* background-color: blue; */
   position: relative;
   border-radius: 15px;
- 
+  
+
   &:hover ${Info} {
     opacity: 1;
     transition: all ease 0.5s;
   }
 `;
 
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
+// const Circle = styled.div`
+//   width: 200px;
+//   height: 200px;
+//   border-radius: 50%;
+//   background-color: white;
+//   position: absolute;
+// `;
 const Image = styled.img`
   height: 75%;
   z-index: 2;
@@ -67,22 +69,41 @@ const Icon = styled.div`
     transform: scale(1.1);
   }
 `;
+
+const Details = styled.div`
+  /* background-color: red; */
+  height: 100px;
+  border-radius: 0 0 15px 15px;
+  /* padding-left: 40px; */
+  padding-top: 5px;
+  text-align: center;
+  color: black;
+`;
+
 const Product = ({ item }) => {
   return (
     <Container>
-      <Circle />
-      <Image src={item.image} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlinedIcon />
-        </Icon>
-        <Icon>
-          <SearchOutlinedIcon />
-        </Icon>
-        <Icon>
-          <FavoriteBorderIcon />
-        </Icon>
-      </Info>
+      <Link to={`/product/${item._id}`}>
+        <Image src={item.image} />
+        <Info>
+          <Icon>
+            <ShoppingCartOutlinedIcon />
+          </Icon>
+          <Icon>
+            <SearchOutlinedIcon />
+          </Icon>
+          <Icon>
+            <FavoriteBorderIcon />
+          </Icon>
+        </Info>
+        <Details>
+          <h2 >{item.title}</h2>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h4>₹ </h4>
+            <h1>{item.price}</h1>
+          </div>
+        </Details>
+      </Link>
     </Container>
   );
 };

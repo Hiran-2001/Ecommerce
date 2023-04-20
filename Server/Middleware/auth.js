@@ -8,7 +8,7 @@ exports.isAuthenticated = asyncHandler(async (req, res, next) => {
   const token = req.cookies.jwtToken;
 
   if (!token) {
-    res.status(401).json({message:"Please login"});
+    res.status(401).json({ message: "Please login" });
   }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);

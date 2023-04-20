@@ -35,7 +35,7 @@ const Options = styled.option``;
 function ProductList() {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
- console.log(category);
+  console.log(category);
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState("newest");
 
@@ -43,12 +43,10 @@ function ProductList() {
     const value = e.target.value;
 
     setFilter({
-        ...filter,
+      ...filter,
       [e.target.name]: value,
     });
   };
-
-
 
   return (
     <Container>
@@ -59,7 +57,9 @@ function ProductList() {
         <Filter>
           <FilterText>Filter Products</FilterText>
           <Select name="color" onChange={handleChange}>
-            <Options disabled selected>Color</Options>
+            <Options disabled selected>
+              Color
+            </Options>
             <Options>White</Options>
             <Options>Black</Options>
             <Options>Red</Options>
@@ -69,7 +69,9 @@ function ProductList() {
           </Select>
 
           <Select name="price" onChange={handleChange}>
-            <Options disabled selected>Price</Options>
+            <Options disabled selected>
+              Price
+            </Options>
             <Options>50000+</Options>
             <Options>25000+</Options>
             <Options>20000+</Options>
@@ -88,7 +90,7 @@ function ProductList() {
         </Filter>
         <Filter>
           <FilterText>Sort Products</FilterText>
-          <Select onChange={(e)=>setSort(e.target.value)}>
+          <Select onChange={(e) => setSort(e.target.value)}>
             <Options value="Newest">Newest</Options>
             <Options value="asc">Price (asc)</Options>
             <Options value="desc">Price(desc)</Options>

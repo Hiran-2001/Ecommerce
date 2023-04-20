@@ -54,28 +54,27 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 exports.getAllProducts = asyncHandler(async (req, res, next) => {
   const qNew = req.query.newItem;
   const qCategory = req.query.category;
-  let products ;
+  let products;
   try {
-    if(qNew){
-        products = await ProductModel.find().sort({createdAt: -1}).limit(1)
-    }else if(qCategory){
-       products = await productModel.find({categories:{$in:qCategory}})
-    }else{
-        products = await productModel.find()
+    if (qNew) {
+      products = await ProductModel.find().sort({ createdAt: -1 }).limit(1);
+    } else if (qCategory) {
+      products = await productModel.find({ categories: { $in: qCategory } });
+    } else {
+      products = await productModel.find();
     }
 
     res.status(200).json({
-        products
-    })
+      products,
+    });
   } catch (error) {}
 });
-
 
 // @desc  Get a single product
 // @route GET -> /api/products/:id
 // @access Admin ,User
 
-exports.getSinlgeProducts = asyncHandler(async (req, res, next) => {
+exports.getSingleProducts = asyncHandler(async (req, res, next) => {
   const Product = await productModel.findById(req.params.id);
 
   res.status(200).json({
@@ -88,7 +87,7 @@ exports.getSinlgeProducts = asyncHandler(async (req, res, next) => {
 // @route DELETE -> /api/products/delete/:id
 // @access Admin
 
-exports.deletProducts = asyncHandler(async (req, res, next) => {
+exports.deleteProducts = asyncHandler(async (req, res, next) => {
   await productModel.findByIdAndDelete(req.params.id);
 
   res.status(200).json({

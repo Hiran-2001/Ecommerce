@@ -67,6 +67,7 @@ exports.login = asyncHandler(async (req, res) => {
       res.status(201).json({
         success: true,
         user,
+        token
       });
     } else {
       res.status(404).json({
