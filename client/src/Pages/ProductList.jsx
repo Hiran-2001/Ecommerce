@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
-import Announcement from "../Components/Announcement";
+// import Announcement from "../Components/Announcement";
 import Products from "../Components/Products";
 import { mobile } from "../Utils/Responsive";
 import { useLocation } from "react-router-dom";
@@ -50,7 +50,7 @@ function ProductList() {
 
   return (
     <Container>
-      <Announcement />
+      {/* <Announcement /> */}
       <Navbar />
       <Title>Dresses</Title>
       <FilterContainer>

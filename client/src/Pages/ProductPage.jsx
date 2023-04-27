@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Navbar from "../Components/Navbar";
-import Announcement from "../Components/Announcement";
+// import Announcement from "../Components/Announcement";
 import { Add, Remove } from "@mui/icons-material";
 import { mobile } from "../Utils/Responsive";
 import { useParams } from "react-router-dom";
@@ -9,7 +9,8 @@ import { useParams } from "react-router-dom";
 // import { useEffect } from "react";
 import { useState } from "react";
 import useGet from "../Hooks/useGet";
-
+import {  addToCart } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 const Container = styled.div``;
 const Wrapper = styled.div`
   display: flex;
@@ -110,32 +111,26 @@ function ProductPage() {
   // console.log(productId.id);
   const [quantity, setQuantity] = useState(1);
 
-  const quantityAddFunc = () => {
-    setQuantity(quantity + 1);
-  };
-  const quantityRmFunc = () => {
-    setQuantity(quantity - 1);
-  };
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const res = await axios.get(`/api/products/${productId.id}`);
-  // console.log(res.data.Product);
-  //     setProducts(res.data.Product);
-  //   };
-
-  //   fetchProducts();
-  // }, []);
-
   const [data] = useGet(`/api/products/${productId.id}`);
+  const dispatch = useDispatch();
+  const handleQuantity = (type) => {
+    if (type === "inc") {
+      setQuantity(quantity + 1);
+    } else {
+      quantity > 1 && setQuantity(quantity - 1);
+    }
+  };
+
+  
 
   return (
     <Container>
-      <Announcement />
+      {/* <Announcement /> */}
       <Navbar />
 
       <Wrapper>
         <ImgContainer>
-          <Image src={data.image} />
+          <Image style={{objectFit:"contain"}} src={data.image} />
         </ImgContainer>
         <InfoContainer>
           <Title>{data.title}</Title>
@@ -161,20 +156,24 @@ function ProductPage() {
             </Filter>
           </FilterContainer>
           <AddContainer>
-            <AmountContainer>
+            {/* <AmountContainer>
               <Remove
-                onClick={quantityRmFunc}
+                onClick={() => {
+                  handleQuantity("dec");
+                }}
                 name="remove"
                 style={{ cursor: "pointer" }}
               />
               <Amount>{quantity}</Amount>
               <Add
-                onClick={quantityAddFunc}
+                onClick={() => {
+                  handleQuantity("inc");
+                }}
                 name="add"
                 style={{ cursor: "pointer" }}
               />
-            </AmountContainer>
-            <Button>ADD TO CART</Button>
+            </AmountContainer> */}
+            <Button onClick={()=>dispatch(addToCart(data))}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

@@ -1,9 +1,9 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
-import Announcement from '../Components/Announcement'
+// import Announcement from '../Components/Announcement'
 import Slider from '../Components/Slider'
 import Categories from '../Components/Categories'
-import Products from '../Components/Products'
+// import Products from '../Components/Products'
 
 
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div> 
-    <Announcement/>
+    {/* <Announcement/> */}
     <Navbar/>
     <Slider/>
     <Categories/>
