@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 // import Announcement from '../Components/Announcement'
 import Navbar from "../Components/Navbar";
@@ -7,6 +7,7 @@ import { mobile } from "../Utils/Responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { decreaseQnt, increaseQnt, removeFromCart } from "../redux/cartRedux";
+import StripeCheckout from "react-stripe-checkout";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -126,8 +127,8 @@ const SummaryItem = styled.div`
   font-weight: 200;
 `;
 
-const RemoveButton =  styled.button`
- border: 2px solid black;
+const RemoveButton = styled.button`
+  border: 2px solid black;
   background-color: black;
   color: white;
   padding: 10px;
@@ -135,7 +136,7 @@ const RemoveButton =  styled.button`
   border-radius: 5px;
   font-weight: 600;
   cursor: pointer;
-`
+`;
 const SummaryItemText = styled.span``;
 const SummaryPrice = styled.span``;
 const Button = styled.button`
@@ -154,9 +155,15 @@ const Button = styled.button`
 `;
 function Cart() {
   const products = useSelector((store) => store.cart.products);
-  const total = useSelector((store=>store.cart.total))
-  const dispatch = useDispatch()
-  console.log(products[0]);
+  const total = useSelector((store) => store.cart.total);
+  const dispatch = useDispatch();
+  const stripeKey = process.env.REACT_APP_STRIPE_KEY ;
+  const [stripeToken, setStripeToken] = useState();
+
+  const onToken = (token) => [setStripeToken(token)];
+
+  console.log(stripeToken);
+
   return (
     <Container>
       {/* <Announcement /> */}
@@ -191,16 +198,18 @@ function Cart() {
                         <b>Size:</b>
                         {item.size}
                       </ProductSize>
-                      <RemoveButton onClick={()=>dispatch(removeFromCart(item._id))}> 
+                      <RemoveButton
+                        onClick={() => dispatch(removeFromCart(item._id))}
+                      >
                         Remove
                       </RemoveButton>
                     </Details>
                   </ProductDetails>
                   <PriceDetails>
                     <ProductAmountContainer>
-                      <Add onClick={()=>dispatch(increaseQnt(item))} />
+                      <Add onClick={() => dispatch(increaseQnt(item))} />
                       <ProductAmount>{item.quantity}</ProductAmount>
-                      <Remove onClick={()=>dispatch(decreaseQnt(item))} />
+                      <Remove onClick={() => dispatch(decreaseQnt(item))} />
                     </ProductAmountContainer>
                     <ProductPrice>₹{item.price}</ProductPrice>
                   </PriceDetails>
@@ -251,8 +260,18 @@ function Cart() {
               <SummaryItemText type="total">Total</SummaryItemText>
               <SummaryPrice>₹ {total}</SummaryPrice>
             </SummaryItem>
-
-            <Button>Checkout Now</Button>
+            <StripeCheckout
+              name="Ecommerce"
+              image="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffilmitamasha.com%2Faditi-ravi%2F&psig=AOvVaw3BsNgXOziXNT_DR89gtzpY&ust=1682706935027000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJDS5PrZyv4CFQAAAAAdAAAAABAE"
+              billingAddress
+              shippingAddress
+              description={`your total is ${total}`}
+              amount={100}
+              token={onToken}
+              stripeKey={stripeKey}
+            >
+              <Button>Checkout Now</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>

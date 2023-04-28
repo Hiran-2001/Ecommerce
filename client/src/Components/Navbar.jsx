@@ -98,8 +98,12 @@ function Navbar() {
           </SearchContainer>
         </Center>
         <Right>
-          <MenuItem>Register</MenuItem>
-          <MenuItem>Sign Up</MenuItem>
+          <Link to={"/register"}>
+            <MenuItem>Register</MenuItem>
+          </Link>
+          <Link to={"/login"}>
+            <MenuItem>Login</MenuItem>
+          </Link>
           <MenuItem>
             <Link to={"/cart"}>
               <Badge badgeContent={products.length} color="primary">

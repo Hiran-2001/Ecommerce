@@ -9,4 +9,4 @@ router.delete('/delete/:id' ,isAuthenticated,deleteOrder)
 router.get('/all' ,isAuthenticated,userOrders)
 router.get('/income' ,isAuthenticated,isAuthorizedUser ,income)
 
-module.exports = router
+module.exports = router 

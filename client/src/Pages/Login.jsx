@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { mobile } from "../Utils/Responsive";
-
+import { loginStart } from "../redux/userSlice";
+import { useState } from "react";
+import { login } from "../redux/apiCalls";
+import { useDispatch } from "react-redux";
+import usePost from "../Hooks/usePost";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -54,18 +59,30 @@ const Link = styled.a`
   cursor: pointer;
 `;
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-  
+  const handleLogin = async (e) => {
+    const res = await axios(`http://localhost:5000/api/user/login`, {email, password} );
+    console.log(res);
+  };
 
   return (
     <Container>
       <Wrapper>
         <Title>Login</Title>
         <Form>
-          <Input placeholder="Username" />
-          <Input placeholder="Password" />
+          <Input
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <Button>Login</Button>
+          <Button onClick={handleLogin}>Login</Button>
           <Link>Forgot Password</Link>
           <Link>Create A New Account</Link>
         </Form>
