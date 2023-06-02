@@ -14,8 +14,8 @@ const cartSlice = createSlice({
     //@desc => add to cart reducer
 
     addToCart: (state, action) => {
-      //  console.log(action.payload._id);
-
+       console.log(action.payload.price);
+        console.log(state.total);
       const itemInCart = state.products.find(
         (item) => item._id === action.payload._id
       );
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
         state.products.push({ ...action.payload, quantity: state.quantity });
       }
 
-      state.total += action.payload.price
+      state.total = state.total + action.payload.price
     },
 
 

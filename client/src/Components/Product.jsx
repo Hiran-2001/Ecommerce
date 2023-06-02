@@ -80,9 +80,9 @@ const Details = styled.div`
   color: black;
 `;
 
-const Product = ({ item }) => {
+const Product = ({ item,key}) => {
   return (
-    <Container>
+    <Container key={key}>
       <Link to={`/product/${item._id}`}>
         <Image src={item.image} />
         <Info>

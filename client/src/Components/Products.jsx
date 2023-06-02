@@ -48,7 +48,7 @@ const Products = ({ cat, filter, price, sort }) => {
   return (
     <Container>
       {products.map((items) => {
-        return <Product item={items} key={items.id} />;
+        return <Product  item={items} key={items.id} />;
       })}
     </Container>
   );

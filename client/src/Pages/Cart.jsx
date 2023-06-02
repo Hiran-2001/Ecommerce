@@ -159,10 +159,12 @@ function Cart() {
   const dispatch = useDispatch();
   const stripeKey = process.env.REACT_APP_STRIPE_KEY ;
   const [stripeToken, setStripeToken] = useState();
-
+  const estimateShipping = 10
+  const shippingDiscount = 20
+   const finalPrice = total + estimateShipping - shippingDiscount
   const onToken = (token) => [setStripeToken(token)];
 
-  console.log(stripeToken);
+  console.log(total);
 
   return (
     <Container>
@@ -248,7 +250,7 @@ function Cart() {
 
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryPrice>₹ 5.2</SummaryPrice>
+              <SummaryPrice>₹ 10</SummaryPrice>
             </SummaryItem>
 
             <SummaryItem>
@@ -258,14 +260,14 @@ function Cart() {
 
             <SummaryItem>
               <SummaryItemText type="total">Total</SummaryItemText>
-              <SummaryPrice>₹ {total}</SummaryPrice>
+              <SummaryPrice>₹ {finalPrice}</SummaryPrice>
             </SummaryItem>
             <StripeCheckout
               name="Ecommerce"
               image="https://www.google.com/url?sa=i&url=https%3A%2F%2Ffilmitamasha.com%2Faditi-ravi%2F&psig=AOvVaw3BsNgXOziXNT_DR89gtzpY&ust=1682706935027000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCJDS5PrZyv4CFQAAAAAdAAAAABAE"
               billingAddress
               shippingAddress
-              description={`your total is ${total}`}
+              description={`your total is ${finalPrice}`}
               amount={100}
               token={onToken}
               stripeKey={stripeKey}
