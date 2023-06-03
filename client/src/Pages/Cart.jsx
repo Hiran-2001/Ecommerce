@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { decreaseQnt, increaseQnt, removeFromCart } from "../redux/cartRedux";
 import StripeCheckout from "react-stripe-checkout";
+import CartErrorPage from "./CartErrorPage";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -164,13 +165,15 @@ function Cart() {
    const finalPrice = total + estimateShipping - shippingDiscount
   const onToken = (token) => [setStripeToken(token)];
 
-  console.log(total);
+  console.log(products.length);
 
   return (
     <Container>
       {/* <Announcement /> */}
       <Navbar />
-      <Wrapper>
+      {
+        products.length > 0 ? (
+          <Wrapper>
         <Title>Your Cart</Title>
         <Top>
           <TopButton>Checkout Now</TopButton>
@@ -277,6 +280,13 @@ function Cart() {
           </Summary>
         </Bottom>
       </Wrapper>
+        ) : (
+          <CartErrorPage/>
+        )
+      }
+       
+      
+      
     </Container>
   );
 }
