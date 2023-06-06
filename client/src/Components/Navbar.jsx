@@ -79,7 +79,7 @@ const Input = styled.input`
 `;
 
 function Navbar() {
-  const products = useSelector((state) => state.cart.products);
+  // const products = useSelector((state) => state.cart.products);
   // console.log(products.length);
   return (
     <Container>
@@ -106,7 +106,7 @@ function Navbar() {
           </Link>
           <MenuItem>
             <Link to={"/cart"}>
-              <Badge badgeContent={products.length} color="primary">
+              <Badge badgeContent={0} color="primary">
                 <ShoppingCartOutlinedIcon />
               </Badge>
             </Link>

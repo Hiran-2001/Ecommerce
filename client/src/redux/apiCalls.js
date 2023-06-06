@@ -11,3 +11,22 @@
 //     dispatch(loginFailed());
 //   }
 // };
+
+import axios from "axios"
+
+const baseURL = "http://localhost:5000/"
+
+axios.defaults.baseURL = baseURL;
+
+export const get = async (url)=>{
+    // console.log(url);
+    try {
+        const res = await axios.get(url)
+        return res.data
+    } catch (error) {
+        return {
+            error : true,
+            message : error
+        }
+    }
+}
