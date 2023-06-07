@@ -26,9 +26,9 @@ const Products = ({ cat, filter, price, sort }) => {
         // );
         dispatch({type :GET_PRODUCT_REQUEST,payload:cat})
       
-        // console.log(productStore.data);
+        console.log(productStore);
         setProducts(productStore.data)
-        console.log(products);
+        // console.log(products);
       } catch (error) {}
     };
     getProduct();

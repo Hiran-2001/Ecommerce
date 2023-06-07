@@ -5,10 +5,10 @@ import * as action from "../Types"
 function* getSaga({type,payload}){
     console.log(payload);
     // const url = 'api/products/all'
-    const categoryUrl = `/api/products/all?category=${payload}`
+    const categoryUrl = `/products/all?category=${payload}`
     try {
         const data = yield call(get ,categoryUrl)
-        // console.log(data.products);
+        console.log(data.products); 
         if(data){
             yield put({"type": action.PRODUCT_SUCCESS, "data":data.products })
         }else{

@@ -14,7 +14,7 @@
 
 import axios from "axios"
 
-const baseURL = "http://localhost:5000/"
+const baseURL = "http://localhost:5000/api"
 
 axios.defaults.baseURL = baseURL;
 
@@ -22,6 +22,18 @@ export const get = async (url)=>{
     // console.log(url);
     try {
         const res = await axios.get(url)
+        return res.data
+    } catch (error) {
+        return {
+            error : true,
+            message : error
+        }
+    }
+}
+
+export const post = async(url,payload)=>{
+    try {
+        const res = await axios.post(url , payload)
         return res.data
     } catch (error) {
         return {
