@@ -33,6 +33,7 @@ export const get = async (url)=>{
 
 export const post = async(url,payload)=>{
     try {
+       
         const res = await axios.post(url , payload)
         return res.data
     } catch (error) {

@@ -16,10 +16,10 @@ export default function productReducer(state = initialState, action) {
                 loading: true
             }
         case type.PRODUCT_SUCCESS:
-            // console.log(action.data);
+            console.log(action.data);
             return {
                 ...state,
-                data: action.data,
+                data: [action.data],
                 loading: false,
                 success: true
             }

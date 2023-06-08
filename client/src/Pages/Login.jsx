@@ -3,10 +3,13 @@ import { mobile } from "../Utils/Responsive";
 // import { loginStart } from "../redux/userSlice";
 import { useState } from "react";
 // import { login } from "../redux/apiCalls";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 // import usePost from "../Hooks/usePost";
+import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import { LOGIN_REQUEST } from "../redux/Types";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -34,10 +37,10 @@ const Title = styled.h1`
   font-size: 25px;
   font-weight: 400;
 `;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
+// const Form = styled.form`
+//   display: flex;
+//   flex-direction: column;
+// `;
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
@@ -60,42 +63,53 @@ const Link = styled.a`
   cursor: pointer;
 `;
 function Login() {
-  const [userLogin, setUserLogin] = useState({
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
   });
+  console.log(inputValue);
 
-  const setUser = (e) => {
+  const setValue = (e) => {
+    //  console.log(e.target.value);
     const { name, value } = e.target;
-
-    setUserLogin(() => {
+    setInputValue(() => {
       return {
-        ...userLogin,
+        ...inputValue,
         [name]: value,
       };
     });
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    console.log("red");
-  
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    dispatch({
+      type: LOGIN_REQUEST,
+      payload: inputValue,
+      navigate: navigate
+    })
   };
 
   return (
     <Container>
       <Wrapper>
         <Title>Login</Title>
-        <Form>
-          <Input type="email" placeholder="email" onChange={setUser}  />
-          <Input
-            placeholder="Password"
-            type="password"
-            onChange={setUser}
-            // value={userLogin.password}
-          />
+        <Form style={{ display: "flex", flexDirection: "column" }}>
+          <Form.Group id="formGroup" className="mb-3" >
 
-          <Button onClick={()=>handleLogin()}>Login</Button>
+            <Form.Control style={{ width: "90%", margin: "10px 0px", padding: "10px" }} autoComplete='off' onChange={setValue} value={inputValue.email} name="email" className='formControl' type="email" placeholder="Email" />
+
+          </Form.Group>
+
+          <Form.Group style={{ display: "flex" }} className="mb-3" >
+
+            <Form.Control style={{ width: "90%", margin: "10px 0px", padding: "10px" }} autoComplete='off' onChange={setValue} value={inputValue.password} name="password" className='formControl' type="password" placeholder="Password" />
+
+
+
+          </Form.Group>
+          <Button onClick={handleLogin} >Login</Button>
           <Link>Forgot Password</Link>
           <Link>Create A New Account</Link>
         </Form>
