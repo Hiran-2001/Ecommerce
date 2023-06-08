@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { mobile } from "../Utils/Responsive";
-import { loginStart } from "../redux/userSlice";
+// import { loginStart } from "../redux/userSlice";
 import { useState } from "react";
-import { login } from "../redux/apiCalls";
-import { useDispatch } from "react-redux";
-import usePost from "../Hooks/usePost";
+// import { login } from "../redux/apiCalls";
+// import { useDispatch } from "react-redux";
+// import usePost from "../Hooks/usePost";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 
 const Container = styled.div`
   width: 100vw;
@@ -59,13 +60,26 @@ const Link = styled.a`
   cursor: pointer;
 `;
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const setUser = (e) => {
+    const { name, value } = e.target;
+
+    setUserLogin(() => {
+      return {
+        ...userLogin,
+        [name]: value,
+      };
+    });
+  };
 
   const handleLogin = async (e) => {
-    const res = await axios(`http://localhost:5000/api/user/login`, {email, password} );
-    console.log(res);
+    e.preventDefault()
+    console.log("red");
+  
   };
 
   return (
@@ -73,16 +87,15 @@ function Login() {
       <Wrapper>
         <Title>Login</Title>
         <Form>
-          <Input
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <Input type="email" placeholder="email" onChange={setUser}  />
           <Input
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            onChange={setUser}
+            // value={userLogin.password}
           />
 
-          <Button onClick={handleLogin}>Login</Button>
+          <Button onClick={()=>handleLogin()}>Login</Button>
           <Link>Forgot Password</Link>
           <Link>Create A New Account</Link>
         </Form>
